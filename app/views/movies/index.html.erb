@@ -7,15 +7,21 @@
 <table>
   <thead>
     <tr>
-      <th>Title</th>
-      <th>Rating</th>
-      <th>Release date</th>
+      <th class="<%= 'hilite-asc' if @sort_col == 'title' && @sort_dir == 'asc' %><%= 'hilite-desc' if @sort_col == 'title' && @sort_dir == 'desc' %>">
+        <%= link_to "Title #{@sort_col == 'title' ? (@sort_dir == 'asc' ? '↓' : '↑') : ''}", movies_path(sort: 'title', direction: @sort_col == 'title' && @sort_dir == 'asc' ? 'desc' : 'asc'), aria: { label: "Title, sorted #{@sort_col == 'title' ? @sort_dir : 'unsorted'}" } %>
+      </th>
+      <th class="<%= 'hilite-asc' if @sort_col == 'rating' && @sort_dir == 'asc' %><%= 'hilite-desc' if @sort_col == 'rating' && @sort_dir == 'desc' %>">
+        <%= link_to "Rating #{@sort_col == 'rating' ? (@sort_dir == 'asc' ? '↓' : '↑') : ''}", movies_path(sort: 'rating', direction: @sort_col == 'rating' && @sort_dir == 'asc' ? 'desc' : 'asc'), aria: { label: "Rating, sorted #{@sort_col == 'rating' ? @sort_dir : 'unsorted'}" } %>
+      </th>
+      <th class="<%= 'hilite-asc' if @sort_col == 'release_date' && @sort_dir == 'asc' %><%= 'hilite-desc' if @sort_col == 'release_date' && @sort_dir == 'desc' %>">
+        <%= link_to "Release date #{@sort_col == 'release_date' ? (@sort_dir == 'asc' ? '↓' : '↑') : ''}", movies_path(sort: 'release_date', direction: @sort_col == 'release_date' && @sort_dir == 'asc' ? 'desc' : 'asc'), aria: { label: "Release date, sorted #{@sort_col == 'release_date' ? @sort_dir : 'unsorted'}" } %>
+      </th>
     </tr>
   </thead>
   <tbody>
     <% @movies.each do |movie| %>
       <tr>
-        <td><%= movie.title %></td>
+        <td><%= link_to movie.title, movie %></td>
         <td><%= movie.rating %></td>
         <td><%= movie.release_date %></td>
       </tr>
